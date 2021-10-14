@@ -1,73 +1,54 @@
 #include<string>
 #include "Cart.h"
+#include<iomanip>
 using namespace std;
-
-Item::Item() {
-	itemName = "";
-	price = 0.0;
-	id = 0;
-	expirationTime = 0;
-}
-
-
-Item::Item(string nItemName, float nPrice, int nId, int nExpirationTime) {
-	itemName = nItemName;
-	price = nPrice;
-	id = nId;
-	expirationTime = nExpirationTime;
-}
-
-string Item::getItemName() {
-	return itemName;
-}
-
-float Item::getPrice() {
-	return price;
-}
-
-int Item::getId() {
-	return id;
-}
-
-int Item::getExpirationTime() {
-	return expirationTime;
-}
-
-void Item::setItemName(string nItemName)
-{
-	itemName = nItemName;
-}
-
-void Item::setPrice(float nPrice)
-{
-	price = nPrice;
-}
-
-void Item::setId(int nId) {
-	id = nId;byi
-}
-
-void Item::setExpirationTime(int nExpirationTime)
-{
-	expirationTime = nExpirationTime;
-}
 
 
 ShoppingCart::ShoppingCart()
 {
-	total = 0;
-	totalCost = 0;
-	capacity = 50;
+	int total = 0;
+	float totalCost = 0;
+	int capacity = 50;
 }
 
 float ShoppingCart::totalPrice() {
-
+	return 0;
 }
 
 int ShoppingCart::totalItems() {
-
+	return 0;
 }
 
 void ShoppingCart::displayCart() {
+	cout << "  | ID      | NAME    | PRICE  | EXPIRATION |" << endl << endl;
+	cout << "---------------------------------------------" << endl << endl;
+	cout << "1 | 9746543 | Apple   | 2.50   | 17         |" << endl << endl;
+	cout << "2 | 8165183 | Banana  | 3.00   | 5          |" << endl << endl;
+	cout << "TOTAL: $" << getTotalCost() << endl; /* TOTAL COST FUNCTION*/
+	cout << "AMOUNT: " << endl; /* AMOUNT VARIABLE << */
+	cout << "CAPACITY: " << endl; /* CAPACITY VARIABLE << */ 
+}
 
+
+void ShoppingCart::displayItem(int index) {
+
+	for (auto i = items.begin(); i != items.end(); i++)
+	{
+		if (index == items[i]) 
+		{
+			cout << "  | ID      | NAME    | PRICE  | EXPIRATION |" << endl << endl;
+			cout << "---------------------------------------------" << endl << endl;
+			cout << "1 | 9746543 | Apple   | 2.50   | 17         |" << endl << endl;
+		}
+	}
+};
+
+int ShoppingCart::searchById(int id) {
+	for (int i = 0; i < items.size(); i++)
+	{
+		if (id == items[i])
+		{
+			Item::getItemName();
+		}
+	}
 }
