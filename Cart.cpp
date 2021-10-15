@@ -3,6 +3,7 @@
 #include<iomanip>
 using namespace std;
 
+Item obj;
 
 ShoppingCart::ShoppingCart()
 {
@@ -22,9 +23,13 @@ int ShoppingCart::totalItems() {
 void ShoppingCart::displayCart() {
 	cout << "  | ID      | NAME    | PRICE  | EXPIRATION |" << endl << endl;
 	cout << "---------------------------------------------" << endl << endl;
-	cout << "1 | 9746543 | Apple   | 2.50   | 17         |" << endl << endl;
-	cout << "2 | 8165183 | Banana  | 3.00   | 5          |" << endl << endl;
-	cout << "TOTAL: $" << getTotalCost() << endl; /* TOTAL COST FUNCTION*/
+	
+	for (int i = 0; i != items.size(); i++)
+	{
+		cout << i+1 << items[i].getId() << " | " << items[i].getItemName() << " | " << items[i].getPrice() << "  | " << items[i].getExpirationTime() << "   | " << endl << endl;
+
+	}
+	cout << "TOTAL: $" << /* getTotalCost() */ endl; /* TOTAL COST FUNCTION*/
 	cout << "AMOUNT: " << endl; /* AMOUNT VARIABLE << */
 	cout << "CAPACITY: " << endl; /* CAPACITY VARIABLE << */ 
 }
@@ -32,23 +37,93 @@ void ShoppingCart::displayCart() {
 
 void ShoppingCart::displayItem(int index) {
 
-	for (auto i = items.begin(); i != items.end(); i++)
-	{
-		if (index == items[i]) 
-		{
+	items[index].getId();
 			cout << "  | ID      | NAME    | PRICE  | EXPIRATION |" << endl << endl;
 			cout << "---------------------------------------------" << endl << endl;
-			cout << "1 | 9746543 | Apple   | 2.50   | 17         |" << endl << endl;
-		}
-	}
+			cout << "  | " << items[index].getId() << " | "<< items[index].getItemName() <<"   | " << items[index].getPrice() << "   | " << items[index].getExpirationTime() << "         |" << endl << endl;
 };
 
 int ShoppingCart::searchById(int id) {
+	int ans = -1;
+
 	for (int i = 0; i < items.size(); i++)
 	{
-		if (id == items[i])
+		if (items[i].getId() == id)
 		{
-			Item::getItemName();
+			ans = i + 1;
+			break;
 		}
 	}
+
+	return ans;
+}
+
+int ShoppingCart::searchByPrice(float price) {
+	int ans = -1;
+
+	int low = 0, high = items.size() - 1;
+
+	int mid = (high + low) / 2;
+
+	while (low <= high)
+	{
+		if (price == items[mid].getPrice()) {
+			return mid;
+		}
+
+		if (price > items[mid].getPrice()) {
+			low = mid + 1;
+		}
+		else
+		{
+			high = mid - 1;
+		}
+		mid = (high + low) / 2;
+	}
+	return ans;
+}
+
+int ShoppingCart::searchByExpirationTime(int expirationTime) {
+	int ans = -1;
+
+	int low = 0, high = items.size() - 1;
+
+	int mid = (high + low) / 2;
+
+	while (low <= high)
+	{
+		if (expirationTime == items[mid].getExpirationTime()) {
+			return mid;
+		}
+
+		if (expirationTime > items[mid].getExpirationTime()) {
+			low = mid + 1;
+		}
+		else
+		{
+			high = mid - 1;
+		}
+		mid = (high + low) / 2;
+	}
+	return ans;
+}
+
+bool ShoppingCart::addItem(Item cartItem) {
+	items.push_back(cartItem);
+	return 1;
+}
+
+
+bool ShoppingCart::removeItem(int itemId) {
+
+	for (int i = 0; i < items.size(); i++)
+	{
+		if (items[i].getId() == itemId)
+		{
+			items.erase(items.begin() + searchById(i));
+			return 1;
+		}
+	}
+
+	return -1;
 }

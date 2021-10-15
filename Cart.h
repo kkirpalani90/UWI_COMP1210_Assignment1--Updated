@@ -25,7 +25,7 @@ public:
 	void sortByExpirationTime();
 	bool isExpired(int);
 	bool removeItem(int);
-	bool addItem(int);
+	bool addItem(Item);
 	void setTotalCost(float);
 	void setItems(vector<Item>);
 	void setCapacity(int);
